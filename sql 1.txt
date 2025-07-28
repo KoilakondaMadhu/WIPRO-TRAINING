@@ -1,0 +1,328 @@
+OBJECT RELATIONAL DATABASE MANAGEMENT SYSTEM (ORDBMS)
+
+What is Data?
+-------------
+~ is piece of meaningfull information about sb/sth
+
+Raja is a Manager working in Wipro with 50K salary.
+				
+What is Record?
+---------------
+group of related data arranged in Row
+
+What is column?
+---------------
+which is having same kind of data vertically
+
+What is table?
+--------------
+Rows and columns
+
+What is Database?
+----------------
+Group of related tables.
+
+=====================================================================================
+1. SQL 			Structured Query Language
+2. PL/SQL		Procedural Language / Structured Query Language
+=====================================================================================
+CREATING TABLE:
+===============
+1. Create a NEW table:
+----------------------
+	CREATE TABLE <table_name> 
+	( <col_name> DATA_TYPE[(width)], ...);
+	
+	CREATE TABLE student 
+	( sid NUMBER(4), sname VARCHAR2(30), mark NUMBER(3), rank NUMBER(2) );
+
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM1
+SQL>    CREATE TABLE student
+  2     ( sid NUMBER(4), sname VARCHAR2(30), mark NUMBER(3), rank NUMBER(2) );
+
+Table created.
+
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM1
+
+To see the structure of the table:
+----------------------------------
+DESC [RIBE] <table_name>
+
+DESCRIBE student
+DESC student
+
+To see all the tables:
+--------------------------
+SELECT * FROM tab; (table)             
+
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM2
+📌 Summary:
+Query	Description
+SELECT * FROM tab;	                        ->Lists your tables and views (if available)
+SELECT table_name FROM user_tables;         ->Lists only your tables
+SELECT table_name, owner FROM all_tables;	  ->Lists accessible tables from all schemas
+
+
+------------------
+SQL>  this is a like line indicatior
+  -----------------------
+
+
+  
+
+SQL> SELECT * FROM tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+BIN$0rnjKySwRTaAW6XEPyL0mA==$0 TABLE
+BIN$rVDCzm23RgCy/JFz5m/ruw==$0 TABLE
+COUNTRIES                      TABLE
+DEPARTMENTS                    TABLE
+EMPLOYEES                      TABLE
+EMP_DETAILS_VIEW               VIEW
+JOBS                           TABLE
+JOB_HISTORY                    TABLE
+LOCATIONS                      TABLE
+REGIONS                        TABLE
+
+
+
+  
+
+
+
+
+  
+
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM2
+
+
+
+  
+
+2. To create a table from already existing one:
+-----------------------------------------------
+CREATE TABLE <new_tab_name> AS
+SELECT * FROM <old_tab_name>;
+
+CREATE TABLE emp AS
+SELECT * FROM employees;
+
+
+
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM3
+
+  
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM3
+
+3. To create a table WITH FEW COLUMNS from already existing one:
+----------------------------------------------------------------
+CREATE TABLE <new_tab_name> AS
+SELECT col1,col2,... FROM <old_tab_name>;
+
+CREATE TABLE emp_1 AS
+SELECT employee_id, first_name, email, job_id FROM employees;
+
+4. To create a table WITH NEW COLUMNS NAMES from already existing one:
+---------------------------------------------------------------------
+CREATE TABLE <new_tab_name>(new_col_name1, new_col_name2,...) AS
+SELECT col1,col2,... FROM <old_tab_name>;
+
+CREATE TABLE emp_2 (empid,name,email,job) AS
+SELECT employee_id, first_name, email, job_id FROM employees;
+===============================================================================
+MODIFYING TABLE:
+===============
+1. add column
+2. drop column
+3. rename column
+4. change data type of a column
+
+1. To Add new column to a table:
+-----------------------------
+ALTER TABLE <tab_name> 
+ADD (col_name data_type [(width)], ...);
+
+ALTER TABLE student
+ADD (dob DATE, course VARCHAR2(5));
+
+2. To rename a column in a table:
+--------------------------------
+ALTER TABLE <table_name>
+RENAME COLUMN <old_column_name> TO <new_col_name>;
+
+ALTER TABLE student
+RENAME COLUMN dob TO date_of_birth;
+
+3. To drop column from a table:
+--------------------------------
+ALTER TABLE <table_name>
+DROP COLUMN <column_name>;				-- To drop single column
+
+ALTER TABLE <table_name>
+DROP (col_name1, col_name2,...);		-- To drop multiple columns
+
+ALTER TABLE student
+DROP COLUMN rank;
+
+ALTER TABLE student
+DROP (course, sname);
+
+4. To change the datatype of a column :
+---------------------------------------
+ALTER TABLE <table_name>
+MODIFY (col_name new_data_type[(width)], ...);
+
+ALTER TABLE student
+MODIFY (mark varchar2(3));
+
+Restrictions on Table and Column Names:
+----------------------------------------
+1. names can be upto 30 chars
+2. should start with character followed by alphanumeric
+3. a table can have max 1000 columns
+4. no space is allowed
+5. if you need space then enclose the names in double quots
+6. table name should be unique in a schema
+7. column name should be unique in the table.
+------------------------------------------------------------------
+TO Drop a Table:
+----------------
+DROP TABLE <table_name>;
+DROP TABLE student;
+------------------------------------------------------------------
+What is Data Dictionary?
+------------------------
+it is system tables - data of data.
+
+select * from user_tables;			--To view tables
+select * from user_tab_columns;		--To view columns in tables
+==================================================================
+SELECT STATEMENT: - To retrive(view) the data from a table.
+-----------------
+1. To select all rows and columns:
+----------------------------------
+SELECT * FROM <table_name>;
+SELECT * FROM emp;
+
+2. To select specific columns:
+----------------------------------
+SELECT col_name1, col_name2, ... FROM <table_name>;
+SELECT first_name, email,salary FROM emp;
+
+3. To Assign Alias name:
+----------------------------------
+SELECT col_name1 [AS] <alias_name>, col_name2 [AS] <alias_name>,... FROM <table_name>;
+
+SELECT first_name AS name, email,salary compensation FROM emp;
+SELECT first_name  "name", email,salary "Sal Comp" FROM emp; 
+==================================================================
+INSERT STATEMENT: -- To add NEW record/row into a table
+-----------------
+1. To insert into a new table for ALL columns:
+----------------------------------------------
+INSERT INTO <table_name> VALUES (val_1,val_2,...);
+INSERT INTO student VALUES (1,'RAJA',90,1);
+
+2. To insert multiple rows at a time:
+-------------------------------------
+INSERT INTO student VALUES (&sid, &name,&mark,&rank);
+/
+3 To insert into specific columns:
+-----------------------------------
+INSERT INTO <table_name> (col_name1,col_name2,...) VALUES (val_1,val_2,...);
+INSERT INTO student (sid, mark) VALUES (6,89);
+
+4 To insert into another table for all columns:
+-----------------------------------------------
+INSERT INTO <dest_tab_name> SELECT * FROM <source_tab_name>;
+INSERT INTO emp SELECT * FROM employees;
+
+4 To insert into another table for specific columns:
+-----------------------------------------------
+INSERT INTO <dest_tab_name>(col_name1,col_name2,...) 
+SELECT col_name1,col_name2,... FROM <source_tab_name>;
+
+INSERT INTO emp (first_name, salary)
+SELECT first_name, salary FROM employees;
+===================================================================
+UPDATE STATEMENT: -- To modify/change the values of ALREADY EXISTING records.
+-----------------
+UPDATE <table_name>
+SET col_name = <value>, col_name = <value>,...
+[WHERE <condition>];
+
+UPDATE student
+SET sname = 'VIJAY', rank = 2
+WHERE sid = 6;
+
+UPDATE student
+SET  rank = 3
+WHERE mark = 89;
+===================================================================
+DELETE STATEMENT: -- To remove few / all records from a table
+----------------
+DELETE FROM <table_name>
+[WHERE <condition>];
+
+DELETE FROM student;		-- Deletes all records
+
+DELETE FROM student
+WHERE mark = 89;
+==================================================================
+WHERE CLAUSE: -- To filter the records
+-------------
+WHERE <condition>
+
+SELECT * FROM employees 
+WHERE employee_id = 101;
+
+SELECT * FROM employees 
+WHERE salary > 14000;
+==================================================================
+TRUNCATE STATEMENT: -- To REMOVE ALL records/Rows from a table
+-------------------
+TRUNCATE TABLE <table_name>;
+TRUNCATE TABLE student;
+
+		DELETE									TRUNCATE
+		------									--------
+1. Specific rows can be deleted			Can not specific rows. Can delete only all Rows
+2. slower than Truncate 				Faster than delete
+3. can be rolledback					cant rollback
+==================================================================
+COMMIT: --To save the changes permenently into the HDD/DB
+-------
+commit;
+
+ROLLBACK: -- To undo the changes upto the last commit
+---------
+rollback;
+
+commit;
+insert ......
+commit;  ---stops here.
+insert .....
+update .....
+delete .....
+select .....
+update .....
+rollback;
+
+ROLLBACK TO SAVEPOINT -- To partially rollback
+----------------------
+insert ....
+commit;
+insert ....
+save point a;
+insert ....
+update ....
+save point c;
+delete ....
+save point b;
+update ....
+
+rollback to savepoint b;
+
+
+
