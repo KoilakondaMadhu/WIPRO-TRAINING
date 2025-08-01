@@ -214,10 +214,51 @@ Elizabeth Bates
  
  
 11)Write SQL Query to Print Employees Details Ordered by FIRST_NAME Ascending and DEPARTMENT Descending.
-Write SQL Query to Print Employees Details with First Names “Valli” and “Karen”.
-Write SQL Query to Print Employees Details Excluding First Names “Valli” and “Karen”.
-Write SQL Query to Print Employees Details with DEPARTMENT Name as “Admin”.
-Write SQL Query to Print Employees Details Whose FIRST_NAME Contains ‘a’.
+ 
+SQL> SELECT * FROM EMPLOYEES ORDER BY FIRST_NAME ASC, DEPARTMENT_id DESC;
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME                 EMAIL                  PHONE_NUMBER         HIRE_DATE JOB_ID     SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+----------- -------------------- ------------------------- ------------------------- -------------------- --------- ---------- ---------- -------------- ---------- -------------
+        121 Adam                 Fripp                     AFRIPP                 650.123.2234         10-APR-05 ST_MAN       8200                        100            50
+        196 Alana                Walsh                     AWALSH                 650.507.9811         24-APR-06 SH_CLERK     3100                        124            50
+        147 Alberto              Errazuriz                 AERRAZUR               011.44.1344.429278   10-MAR-05 SA_MAN      12000              .3        100            80
+        103 Alexander            Hunold                    AHUNOLD                590.423.4567         03-JAN-06 IT_PROG      9000                        102            60
+
+ ==========================================================================================================================================================================================
+ 
+12)Write SQL Query to Print Employees Details with First Names “Valli” and “Karen”.
+
+ SQL> SELECT * FROM EMPLOYEES WHERE FIRST_NAME IN ('Valli', 'Karen');
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME                 EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+----------- -------------------- ------------------------- ------------------------- -------------------- --------- ---------- ---------- -------------- ---------- -------------
+        106 Valli                Pataballa                 VPATABAL                  590.423.4560         05-FEB-06 IT_PROG          4800               103             60
+        119 Karen                Colmenares                KCOLMENA                  515.127.4566         10-AUG-07 PU_CLERK         2500               114             30
+        146 Karen                Partners                  KPARTNER                  011.44.1344.467268   05-JAN-05 SA_MAN          13500             .3100             80
+
+====================================================================================================================================================================================================
+ 
+ 
+13)Write SQL Query to Print Employees Details Excluding First Names “Valli” and “Karen”.
+
+ 
+SQL> SELECT * FROM EMPLOYEES WHERE FIRST_NAME NOT IN ('Valli', 'Karen');
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME                 EMAIL                     PHONE_NUMBER    HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+----------- -------------------- ------------------------- ------------------------- -------------------- --------- ---------- ---------- -------------- ---------- -------------
+        100 Steven               King                      SKING                     515.123.4567    17-JUN-03 AD_PRES         24000                                      90
+        101 Neena                Kochhar                   NKOCHHAR                  515.123.4568    21-SEP-05 AD_VP           17000                       100            90
+        102 Lex                  De Haan                   LDEHAAN                   515.123.4569    13-JAN-01 AD_VP           17000                       100            90
+ ============================================================================================================================================================================================
+ 
+14)Write SQL Query to Print Employees Details with DEPARTMENT Name as “Admin”.
+
+
+ 
+15)Write SQL Query to Print Employees Details Whose FIRST_NAME Contains ‘a’.
+
+
+ DESC
 Write SQL Query to List Employees Info Whose FIRST_NAME Ends with ‘r’.
 Write SQL Query to Fetch Employeess Whose FIRST_NAME Ends with ‘h’ and Has 6 Letters.
 Write SQL Query to Show Employees Info Whose SALARY is Between 10000 & 20000.
