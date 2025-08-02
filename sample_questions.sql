@@ -253,6 +253,26 @@ EMPLOYEE_ID FIRST_NAME           LAST_NAME                 EMAIL                
  
 14)Write SQL Query to Print Employees Details with DEPARTMENT Name as “Admin”.
 
+ SQL> SELECT e.*
+  2  FROM employees e
+  3  JOIN departments d
+  4    ON e.department_id = d.department_id
+  5  WHERE d.department_name = 'Administration';
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME                 EMAIL                     PHONE_NUMBER    HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+----------- -------------------- ------------------------- ------------------------- -------------------- --------- ---------- ---------- -------------- ---------- -------------
+        200 Jennifer             Whalen                    JWHALEN                   515.123.4444    17-SEP-03 AD_ASST          4400                       101            10
+
+SQL>
+
+
+
+
+
+
+
+
+
 
  
 15)Write SQL Query to Print Employees Details Whose FIRST_NAME Contains ‘a’.
@@ -384,3 +404,4 @@ a) Having
 b) Select
 c) Where
 d) Group by
+
