@@ -284,7 +284,36 @@ Write SQL Query to Fetch Employeess Whose FIRST_NAME Ends with ‘h’ and Has 6
 Write SQL Query to Show Employees Info Whose SALARY is Between 10000 & 20000.
 Write SQL Query to Display Employeess Who Joined in 07-MAR-06
 Write SQL Query to Print Employee Count in ‘Admin’ Department.
+ ====================================================================================
 Write SQL Query to Fetch Employees Names with Salaries >= 5000 and <= 10000.
+      -->where
+SQL> select first_name from employees where salary between 5000 and 10000;
+
+FIRST_NAME
+--------------------
+Alexander
+Bruce
+Daniel
+John
+Ismael
+Jose Manuel
+Luis
+Matthew
+
+ --> between
+
+ 
+SQL> select first_name from employees e where e.salary >= 5000 and salary <= 10000 ;
+
+FIRST_NAME
+--------------------
+Alexander
+Bruce
+Daniel
+John
+Kevin
+ 
+ 
 Write SQL Query to List Employees Count Per Department in Descending Order.
 Write SQL Query to Clone a New Table from Another Table.
 Write SQL Query to Display Intersecting Records of Two Tables.
@@ -404,4 +433,5 @@ a) Having
 b) Select
 c) Where
 d) Group by
+
 
