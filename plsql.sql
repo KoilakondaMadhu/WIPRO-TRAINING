@@ -529,6 +529,188 @@ END;
 
 
 
+LoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoopsLoops
+ -- SIMPLE LOOPS
+	
+
+DECLARE
+   x NUMBER := 0;
+
+BEGIN
+   LOOP
+      DBMS_OUTPUT.PUT_LINE('Inside loop:  x = ' || TO_CHAR(x));
+      x := x + 1;
+
+      -- Conditional exit
+      EXIT WHEN x = 4;
+   END LOOP;
+
+   -- After exit
+   DBMS_OUTPUT.PUT_LINE('After loop:  x = ' || TO_CHAR(x));
+END;
+-- OUPTPUT//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Inside loop:  x = 0
+Inside loop:  x = 1
+Inside loop:  x = 2
+Inside loop:  x = 3
+After loop:  x = 4
+
+PL/SQL procedure successfully completed.
+
+
+
+===========================================================================================
+
+FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP FOR LOOP 
+
+FOR LOOP:
+DECLARE 
+	v_min NUMBER := 1;
+	v_max NUMBER := 10;
+BEGIN 
+	FOR i IN v_min..v_max LOOP
+		dbms_output.put_line('the value of i is : ' || i);
+	END LOOP;
+END;
+
+-----------------------------------------------------------------------------------------------
+the value of i is : 1
+the value of i is : 2
+the value of i is : 3
+the value of i is : 4
+the value of i is : 5
+the value of i is : 6
+the value of i is : 7
+the value of i is : 8
+the value of i is : 9
+the value of i is : 10
+
+PL/SQL procedure successfully completed.
+=======================================================================================
+IF LOWER BOND = HIGHER BOUD  ONLY ONE ITERATION
+	
+DECLARE
+	v_min NUMBER := 10;
+	v_max NUMBER := 10;
+BEGIN
+	FOR i IN v_min..v_max LOOP
+		dbms_output.put_line('the value of i is : ' || i);
+	END LOOP;
+END;
+/
+
+===============================================================================================
+
+
+
+============================================================================================================
+	
+
+                                                     ->USING REVERSE FOR LOOP
+  1  DECLARE
+  2     v_min NUMBER := 1;
+  3     v_max NUMBER := 10;
+  4  BEGIN
+  5     FOR i IN REVERSE v_min..v_max LOOP       --> REVERE
+  6             dbms_output.put_line('the value of i is : ' || i);
+  7     END LOOP;
+  8* END;
+SQL> /
+the value of i is : 10
+the value of i is : 9
+the value of i is : 8
+the value of i is : 7
+the value of i is : 6
+the value of i is : 5
+the value of i is : 4
+the value of i is : 3
+the value of i is : 2
+the value of i is : 1
+
+PL/SQL procedure successfully completed.
+
+SQL>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
