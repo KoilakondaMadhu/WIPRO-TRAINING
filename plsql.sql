@@ -15,10 +15,6 @@ PL/SQL procedure successfully completed.
 
 
 ========================================================
-declare 
-  v_sal Number(10);
-begin 
-
 
 DECLARE
     v_sal NUMBER(10);
