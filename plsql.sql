@@ -1,5 +1,7 @@
 
-SQL> set serveroutput on
+SQL> set serveroutput on   
+
+==============================================================================	
 SQL> begin
     dbms_output.put_line('good Morning');
     end;
@@ -187,6 +189,10 @@ The emp name is Neena and works in department Executive with total salary of Rs 
 
 ==========================================================================================================
 
+	
+					%TYPE
+------	
+	
 DECLARE
     v_sal   employees.salary%TYPE;
     v_dept  employees.department_id%TYPE;
@@ -205,3 +211,74 @@ The salary is 24000 department is 90
 PL/SQL procedure successfully completed.
 
 SQL>
+
+
+=======================================================================================================================================
+
+				%ROWTYPE
+				--------
+				-------- if majority/ all  from the same column then use it 
+	
+
+			->	VARIABLE_NAME TABLE_NAME%ROWTYPE;  -- TO DECLARE VARIABLE 
+
+			->	VARIABLE_NAME COLUMN_NAME%ROWTYPE;  -- TO ACCESS THE INDIVIDUAL COLUMN
+				
+
+DECLARE
+	                  v_row_emp employees%ROWTYPE; --<<<<--
+	
+	
+BEGIN
+	                  SELECT * INTO v_row_emp   --<<<<-
+    -- SELECT salary, department_id  cant use individual column
+    -- INTO v_sal, v_dept 	
+	
+	
+
+    FROM employees 
+    WHERE employee_id = 100;
+
+    DBMS_OUTPUT.PUT_LINE('The salary is ' 
+	    		|| v_row_emp.salary
+	    		|| ' department is '
+	    		|| v_row-emp.department_id);
+END;
+/
+	
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+DECLARE
+    v_row_emp employees%ROWTYPE;
+BEGIN
+    SELECT * INTO v_row_emp
+    FROM employees
+    WHERE employee_id = 100;
+
+    DBMS_OUTPUT.PUT_LINE('The salary is ' || v_row_emp.salary
+                         || ' department is '
+                         || v_row_emp.department_id);
+END;
+/
+
+------------------------------------------------------------------
+
+The salary is 24000 department is 90
+
+=====================================================================================
+
+1. variable name can be upto 30 char
+2. should start with CHAR 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
