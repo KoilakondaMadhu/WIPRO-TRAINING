@@ -143,6 +143,39 @@ The emp name is Neena and works in department Executive with total salary of Rs 
 PL/SQL procedure successfully completed.
  ==========================================================================================================   
 
+	
+ END;
+SQL> BEGIN
+  2     FOR rec IN (
+  3        SELECT e.first_name, d.department_name, e.salary
+  4        FROM employees e
+  5        JOIN departments d ON e.department_id = d.department_id
+  6     ) LOOP
+  7        DBMS_OUTPUT.PUT_LINE(
+  8           'The emp name is ' || rec.first_name ||
+  9           ' and works in department ' || rec.department_name ||
+ 10           ' with salary of Rs ' || rec.salary
+ 11        );
+ 12     END LOOP;
+ 13  END;
+ 14  /
+-----------------------------------------------------------------------------------------------	 
+The emp name is Jennifer and works in department Administration with salary of Rs 4400
+The emp name is Michael and works in department Marketing with salary of Rs 13000
+The emp name is Pat and works in department Marketing with salary of Rs 6000
+The emp name is Den and works in department Purchasing with salary of Rs 11000
+The emp name is Alexander and works in department Purchasing with salary of Rs 3100
+The emp name is Shelli and works in department Purchasing with salary of Rs 2900
+The emp name is Sigal and works in department Purchasing with salary of Rs 2800
+The emp name is Guy and works in department Purchasing with salary of Rs 2600
+The emp name is Karen and works in department Purchasing with salary of Rs 2500
+The emp name is Susan and works in department Human Resources with salary of Rs 6500
+The emp name is Matthew and works in department Shipping with salary of Rs 8000
+The emp name is Adam and works in department Shipping with salary of Rs 8200
+The emp name is Payam and works in
+
+
+=====================================================================================================================
 
 if there is any change in the datatype automatical  oracle audjest and change the dataype and width
 
