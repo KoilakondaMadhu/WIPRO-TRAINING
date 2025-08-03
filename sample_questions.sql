@@ -266,26 +266,101 @@ EMPLOYEE_ID FIRST_NAME           LAST_NAME                 EMAIL                
 SQL>
 
 
+===============================================================================================================================================
+ 
+ 
+15)Write SQL Query to Print Employees Details Whose FIRST_NAME Contains ‘a’.
+
+SELECT * FROM EMPLOYEES WHERE FIRST_NAME LIKE '%a%';
 
 
 
+SQL> SELECT * FROM EMPLOYEES WHERE FIRST_NAME LIKE '%a%';
 
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+        101 Neena                Kochhar
+NKOCHHAR                  515.123.4568         21-SEP-05 AD_VP           17000
+                      100            90
+
+        103 Alexander            Hunold
+AHUNOLD                   590.423.4567         03-JAN-06 IT_PROG          9000
+                      102            60
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NU
+=============================================================================================================================
+ 
+16)Write SQL Query to List Employees Info Whose FIRST_NAME Ends with ‘r’.
+
+  SELECT first_name FROM EMPLOYEES WHERE FIRST_NAME LIKE '%r';
+---------------------------------------------------------------------------------------
+FIRST_NAME
+--------------------
+Sundar
+Jennifer
+Tayler
+Peter
+Alexander
+Alexander
+ ============================================================================================================================
+17)Write SQL Query to Fetch Employeess Whose FIRST_NAME Ends with ‘h’ and Has 6 Letters.
+
+SQL> SELECT first_name FROM EMPLOYEES WHERE FIRST_NAME LIKE'_____h';
+---------------------------------------------------------------
+FIRST_NAME
+--------------------
+Sarath
+
+ ============================================================================================================
+ 
+18)Write SQL Query to Show Employees Info Whose SALARY is Between 10000 & 20000.
+
+SQL> select * from employees where salary >= 10000 and salary >= 20000
+  2  ;
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+        100 Steven               King
+SKING                     515.123.4567         17-JUN-03 AD_PRES         24000
+                                     90
+
+
+
+ =========================================================================================================================
+19)Write SQL Query to Display Employeess Who Joined in 07-MAR-06
+
+ SELECT * FROM EMPLOYEES WHERE HIRE_DATE = TO_DATE('07-MAR-06','DD-MON-YY');
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME                 EMAIL
+----------- -------------------- ------------------------- -------------------------
+PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------------- --------- ---------- ---------- -------------- ---------- -------------
+        112 Jose Manuel          Urman                     JMURMAN
+515.124.4469         07-MAR-06 FI_ACCOUNT       7800                       108               100
+
+
+SQL>
+ ====================================================================================================================
+ 
+20)Write SQL Query to Print Employee Count in ‘Admin’ Department.
 
 
 
 
  
-15)Write SQL Query to Print Employees Details Whose FIRST_NAME Contains ‘a’.
-
-
- DESC
-Write SQL Query to List Employees Info Whose FIRST_NAME Ends with ‘r’.
-Write SQL Query to Fetch Employeess Whose FIRST_NAME Ends with ‘h’ and Has 6 Letters.
-Write SQL Query to Show Employees Info Whose SALARY is Between 10000 & 20000.
-Write SQL Query to Display Employeess Who Joined in 07-MAR-06
-Write SQL Query to Print Employee Count in ‘Admin’ Department.
  ====================================================================================
-Write SQL Query to Fetch Employees Names with Salaries >= 5000 and <= 10000.
+ 
+21)rite SQL Query to Fetch Employees Names with Salaries >= 5000 and <= 10000.
       -->where
 SQL> select first_name from employees where salary between 5000 and 10000;
 
@@ -312,8 +387,28 @@ Bruce
 Daniel
 John
 Kevin
+
+ betweem
+ ----------
  
- 
+
+  SELECT * FROM EMPLOYEES WHERE SALARY BETWEEN 10000 AND 20000;
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME                 EMAIL
+----------- -------------------- ------------------------- -------------------------
+PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------------- --------- ---------- ---------- -------------- ---------- -------------
+        101 Neena                Kochhar                   NKOCHHAR
+515.123.4568         21-SEP-05 AD_VP           17000                       100      90
+
+        102 Lex                  De Haan                   LDEHAAN
+515.123.4569         13-JAN-01 AD_VP           17000                       100      90
+
+        108 Nancy                Greenberg                 NGREENBE
+515.124.4569         17-AUG-02 FI_MGR          12008                       101     100
+
+        114 Den                  Raph
+ ================================================================================================================
 Write SQL Query to List Employees Count Per Department in Descending Order.
 Write SQL Query to Clone a New Table from Another Table.
 Write SQL Query to Display Intersecting Records of Two Tables.
@@ -433,5 +528,6 @@ a) Having
 b) Select
 c) Where
 d) Group by
+
 
 
