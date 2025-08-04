@@ -39,7 +39,7 @@ Matthew              Weiss                     Shipping                         
            50
 
 ==========================================================================================================
-
+4
   SAME NAEM FOR COL AT SELECT OK BUT AT CREATE TABLE IS NOT OK
 
 ✅ Here's a practical example:
@@ -60,3 +60,25 @@ CREATE TABLE test AS
 SELECT e.DEPARTMENT_ID, d.DEPARTMENT_ID
 FROM employees e
 JOIN departments d ON e.department_id = d.department_id;
+
+===============================================================================================
+
+
+
+join brings only common from both 
+
+
+
+=================================
+
+
+=================================================================================================================
+left join bring 
+which are from beside from -> complete after join only matched
+                      ----------------
+
+=================================================================================================================
+RIGHT join bring 
+which are from beside from -> only matched after join complete
+                      --------------------
+
