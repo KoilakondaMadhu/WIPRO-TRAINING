@@ -82,3 +82,21 @@ RIGHT join bring
 which are from beside from -> only matched after join complete
                       --------------------
 
+
+===================================================================================================================
+
+FULL OUTTER JOIN ON 
+  WILL CREATE TABLE WITH DUPLICATE COLUMNS SO IT WILL THROW A ERRON ON CREATE A TABLE SO USE AS ALISIS ;
+
+CREATE TABLE emp_dept_fulljoin AS
+SELECT 
+    e.employee_id,
+    e.first_name,
+    e.department_id AS emp_dept_id,     -- alias to avoid duplication
+    d.department_id AS dept_dept_id,    -- alias to avoid duplication
+    d.department_name
+FROM employees e
+FULL OUTER JOIN departments d 
+    ON e.department_id = d.department_id;
+
+
