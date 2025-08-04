@@ -1,0 +1,62 @@
+
+
+1) INNER JOIN 
+  
+SELECT e.employee_id, e.first_name, d.department_name
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id;
+
+===================================================================================================
+
+
+2) create new table by join 
+  
+CREATE TABLE empdetails AS
+SELECT e.employee_id AS empid, 
+       e.first_name AS empname, 
+       d.department_name
+FROM employees e
+JOIN departments d ON d.department_id = e.department_id;
+
+
+
+====================================================================================================
+
+SELECT e.First_name,e.last_name,d.department_name,e.department_id ,d.department_id
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id
+/
+
+
+FIRST_NAME           LAST_NAME                 DEPARTMENT_NAME                DEPARTMENT_ID
+-------------------- ------------------------- ------------------------------ -------------
+DEPARTMENT_ID
+-------------
+James                Landry                    Shipping                                  50
+           50
+
+Matthew              Weiss                     Shipping                                  50
+           50
+
+==========================================================================================================
+
+  SAME NAEM FOR COL AT SELECT OK BUT AT CREATE TABLE IS NOT OK
+
+✅ Here's a practical example:
+✔️ This works:
+sql
+Copy
+Edit
+SELECT e.DEPARTMENT_ID, d.DEPARTMENT_ID
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id;
+Because it's just a query, Oracle displays both columns, even though they share the same name.
+
+❌ This fails:
+sql
+Copy
+Edit
+CREATE TABLE test AS
+SELECT e.DEPARTMENT_ID, d.DEPARTMENT_ID
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id;
