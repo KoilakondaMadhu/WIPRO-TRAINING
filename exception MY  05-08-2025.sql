@@ -250,6 +250,349 @@ THE TOO MANY ROWS HANDED IN THE OUTER BLOCK ----<<<<<<<<<<<<IT MEANS THE OUTER E
 PL/SQL procedure successfully completed.
 
 
+  the above is unanymous they can not be referced 
+============================================================================================================
+============================================================================================================
+
+=============================================================================================================
+  --<<<<<<<<<<<<<<<<<<<<<<<SUBPROGRAMS
+
+SUB PROGRAMS:   is a named pl/sql block which is stored in the database and CAN BE refered in any statements
+--------------
+
+
+ salary: 
+DECLARE 
+       i NUMBER ;
+        y varchar2(40);
+BEGIN 
+      SELECT salary , job_id into i,y from employees where employee_id = p_empid;
+      DBMS_OUTPUT.PUT_LINE('THE SALARY IS :' ||i);
+END;
+/
+
+=============================================================================================
+
+
+
+PL/SQL Subprograms
+Definition
+A PL/SQL subprogram is a named PL/SQL block that can be invoked repeatedly.
+
+If the subprogram has parameters, their values can differ for each invocation.
+
+Two Types:
+Procedure – to perform an action
+
+Function – to compute and return a value
+
+Reasons to Use Subprograms
+1. Modularity
+
+Subprograms let you break a program into manageable, well-defined modules.
+
+2. Easier Application Design
+
+When designing an application, you can defer implementation details of the subprograms until youve tested the main program, and then refine them one step at a time.
+
+
+3 Maintainability
+you can change the implementation details of a subprogram without changing its invoker
+4 Packageability
+ SUBPROGRAMS CAN BE GROUPED INTO PACKAGES
+5 REUSABILITY
+ Any number of applications, in many different environments, can use the same
+
+
+=========================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===================
+====
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=========================
+
+
+
+
+
+
+
+
+
+
+
+syntax for procedure :
+
+
+CREATE [ OR REPLACE ] PROCEDURE [ schema_name. ] <proc_name> (param_list) ] IS | AS
+<BODY>
+
+END [<proc_name>
+
+  example 
+  
+
+
+
+
+
+
+
+-- Create or replace a procedure named p1 in the HR schema
+CREATE OR REPLACE PROCEDURE hr.p1 IS
+
+    -- Declare a variable to store the salary
+    v_sal NUMBER;
+
+    -- Declare a variable to store the job ID
+    v_job VARCHAR2(20);
+
+BEGIN
+    -- Start an inner block to handle exceptions specifically for the SELECT statement
+    BEGIN
+        -- Try to fetch salary and job ID for employee with ID 110 from the EMP table
+        SELECT salary, job_id INTO v_sal, v_job
+        FROM emp
+        WHERE employee_id = 110;
+
+        -- Print the fetched values using DBMS_OUTPUT
+        DBMS_OUTPUT.PUT_LINE('The salary is : ' || v_sal || '  The job is : ' || v_job);
+
+    EXCEPTION
+        -- Handle case where no record is found for employee_id = 110
+        WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE('The Record not found');
+    END;
+END p1;
+/
+
+  --------------------------
+  Procedure created.
+===============================================================================================================================
+
+
+
+-- Create or replace a dynamic procedure with input parameter p_empid
+CREATE OR REPLACE PROCEDURE hr.p1(p_empid NUMBER) IS
+    -- Declare variables to store result of SELECT
+    v_sal NUMBER;
+    v_job VARCHAR2(20);
+BEGIN
+    BEGIN
+        -- Fetch salary and job for the given employee ID
+        SELECT salary, job_id INTO v_sal, v_job
+        FROM emp
+        WHERE employee_id = p_empid;
+
+        -- Print the fetched data
+        DBMS_OUTPUT.PUT_LINE('The salary is :' || v_sal || '  The job is :' || v_job);
+
+    EXCEPTION
+        -- Handle case when no matching employee is found
+        WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE('The Record not found');
+    END;
+END p1;
+/
+
+
+
+SQL> BEGIN
+  2      p1(999);
+  3  END;
+  4  /
+   --------------------------------------------------------------------------------- 
+The Record not found
+
+PL/SQL procedure successfully completed.
+
+=======================================================================================================================
+
+
+FORMAL and ACTUAL Parameters:
+------------------------------
+Formal == THE  Parameter declare in the header of Subprograms
+Actual == The Variable etc which pass value to Formal Parameters.
+
+DECLARE 
+        v_id NUMBER := 150;
+BEGIN 
+        p1(v_id);
+END;
+
+
+===============================================================================
+PARAMETER MODE:
+1. IN    -- it takes values to INSIDE of the subprogram (DEFAULT)
+2. OUT   -- it takes values to OUTSIDE of the subprogram
+3. IN OUT -- first it takes the value inside , after execution , takes the value OUTSIDE
+ inout is not advisable to use it
+
+CREATE OR REPLACE PROCEDURE hr.p1(p_empid IN NUMBER, p_sal OUT NUMBER) IS 
+      v_sal NUMBER;
+      v_job VARCHAR2(20);
+
+BEGIN 
+      SELECT salary , job_id  INTO v_sal , v_job FROM emp WHERE employee_id = p_empid;
+      p_sal := v_sal;
+EXCEPTION 
+      WHEN NO_DATA_FOUND THEN
+      DBMS_OUTPUT.PUT_LINE ('THE RECORD NOT FOUND');
+END p1;
+/
+--------------------------------------------------------------------
+===================================================================================================
+
+
+
+
+DECLARE
+    v_id NUMBER := 150;
+    v_salary NUMBER;
+BEGIN
+    p1(v_id, v_salary);
+END;
+/
+
+
+
+m
+===============================================================================================================
+--<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<IN OUT
+
+CREATE OR REPLACE PROCEDURE hr.p1(
+    p_empid IN NUMBER,
+    p_sal   IN OUT NUMBER
+) IS
+    v_sal NUMBER;
+    v_job VARCHAR2(20);
+BEGIN
+    BEGIN
+        SELECT salary, job_id INTO v_sal, v_job
+        FROM emp
+        WHERE employee_id = p_empid;
+
+        p_sal := p_sal + v_sal;
+
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE('The Record not found');
+    END;
+END p1;
+/
+
+
+---------------------------------
+DECLARE 
+      X NUMBER := 160;
+      Y  NUMBER := 1000;
+BEGIN 
+    P1(X,Y);
+    DBMS_OUTPUT.PUT_LINE('the salary of employee_id ' ||X||'is' ||Y);
+
+end;
+
+---------------------------------------------------------------------------------------
+
+the salary of employee_id 160is8500
+
+PL/SQL procedure successfully completed.
+
+=================================================================================================
+
+
+DECLARE 
+        i NUMBER := 110;
+    PROCEDURE p2(p_empid IN NUMBER ) IS 
+        x number;
+    BEGIN 
+        SELECT salary INTO x FROM emp WHERE employee_id = p_empid;
+        DBMS_OUTPUT.PUT_LINE('The salary is : ' || x);
+    END;
+BEGIN 
+    p2(i);
+END;
+
+    
+
+=============================================================
+
+1. pass by referance 
+2. pass by value
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
