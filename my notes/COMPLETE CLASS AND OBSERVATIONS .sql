@@ -1454,28 +1454,243 @@ Purpose	 VARIANCE returns the variance of expr.
 Example	 SELECT VARIANCE(salary) "Variance"
 		   FROM employees;
 ------------------------------------------------------------------------------------------
+=====================================================================================================
+	
+GROUP BY HAVING PDF PPT
+
+GROUP BY Clause
+--------------
+Specify the GROUP BY clause if you want the database to group the selected rows based on the value of expr(s) for each row and return a single row of summary information for each group. 
+
+Expressions in the GROUP BY clause can contain any columns of the tables, views, or materialized views in the FROM clause, regardless of whether the columns appear in the select list.
+
+The GROUP BY clause groups rows but does not guarantee the order of the result set. To order the groupings, use the ORDER BY clause.
+
+-------------------------------------------------------------------
+GROUP BY Clause (Cont…)
+
+
+Syntax
+
+		GROUP BY expr,… HAVING <condition>
+Example
+
+SELECT department_id, MIN(salary), MAX (salary)
+     FROM employees
+     GROUP BY department_id
+   ORDER BY department_id;
+
+SELECT department_id, MIN(salary), MAX (salary)
+     FROM employees
+     WHERE job_id = 'PU_CLERK'
+     GROUP BY department_id
+   ORDER BY department_id;
+
+-------------------------------------------------------
+
+HAVING Clause
+
+Use the HAVING clause to restrict the groups of returned rows to those groups for which the specified condition is TRUE. If you omit this clause, then the database returns summary rows for all groups.
+
+Example		SELECT department_id, MIN(salary), MAX (salary)
+   FROM employees
+   GROUP BY department_id
+   HAVING MIN(salary) < 5000
+   ORDER BY department_id;
+
+SELECT department_id, manager_id 
+   FROM employees 
+   GROUP BY department_id, manager_id HAVING (department_id, manager_id) IN
+   (SELECT department_id, manager_id FROM employees x 
+      WHERE x.department_id = employees.department_id)
+   ORDER BY department_id;
+
+The above example uses a correlated subquery in a HAVING clause that eliminates from the result set any departments without managers and managers without departments:
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+DAY 3 30-07-25
+
+	VIEW PPT PDF
+VIEW
+----
+
+Definition:
+
+View is a logical table based on one or more tables or views. A view contains no data itself. The tables upon which a view is based are called base tables.
+
+Syntax
+
+CREATE [OR REPLACE] [[NO] FORCE] VIEW [schema.] <view_name> 
+[ ( col_list ) [ <inline_constraint>  |  <out_of_line_constraint>  ] ]
+   AS <subquery> 
+   [ WITH READ ONLY | CHECK OPTION 
+	[CONSTRAINT <constraint_name> ]  
+   ] ;
+
+--------------------------------------------------------------
+Creating a View: Example
+
+CREATE VIEW emp_view AS 
+   SELECT last_name, salary*12 annual_salary
+   FROM employees 
+   WHERE department_id = 20;
+
+Creating a View with Constraints: Example
+
+CREATE VIEW emp_sal (emp_id, last_name, email UNIQUE ,
+   CONSTRAINT id_pk PRIMARY KEY (emp_id))
+   AS SELECT employee_id, last_name, email FROM employees;
+
+----------------------------------------------------------
+
+Creating an Updatable View: Example
+CREATE VIEW clerk AS
+   SELECT employee_id, last_name, department_id, job_id 
+   FROM employees
+   WHERE job_id = 'PU_CLERK' 
+      or job_id = 'SH_CLERK' 
+      or job_id = 'ST_CLERK';
+
+UPDATE clerk SET job_id = 'PU_MAN' WHERE employee_id = 118;
+Creating a View with Check Option: Example
+CREATE VIEW clerk AS
+   SELECT employee_id, last_name, department_id, job_id 
+   FROM employees
+   WHERE job_id = 'PU_CLERK' 
+WITH CHECK OPTION;
+
+
+
+---------------------------------------------------------------------
+
+
+Creating a Read-Only View: Example
+CREATE VIEW customer_ro (name, language, credit)
+      AS SELECT cust_last_name, nls_language, credit_limit
+      FROM customers
+      WITH READ ONLY;
+Creating a Join View: Example
+CREATE VIEW locations_view AS
+   SELECT d.department_id, d.department_name, l.location_id, l.city
+   FROM departments d, locations l
+   WHERE d.location_id = l.location_id;
+
+SELECT column_name, updatable 
+   FROM user_updatable_columns
+   WHERE table_name = 'LOCATIONS_VIEW'
+   ORDER BY column_name, updatable;
+--------------------------------------------------------------------
+
+
+To Alter View Syntax
+
+ALTER VIEW [schema.] <view_name> 
+[ADD <out_of_line_constraint> ]
+[DROP [CONSTRAINT <constraint_name> | PRIMARY KEY | UNIQUE (<col_name>) ]
+[COMPILE]
+[ READ [ ONLY | WRITE ] ]
+
+Example   			ALTER VIEW customer_ro  COMPILE;
+
+To Drop View 
+				DROP VIEW <view_name>;
+
+Data Dictionary Views		USER_VIEWS
+				ALL_VIEWS
+				DBA_VIEWS
+-----------------------------------------------------------------------------------
+
+
+SET PPT PDF
+
+SET OPERATORS
+
+Definition:
+
+Set operators combine the results of two component queries into a single result. Queries containing set operators are called compound queries. 
+
+------------
+SET OPERATORS – UNION ALL
+
+
+Definition:
+
+
+	The UNION ALL operator does not eliminate duplicate selected rows
+
+Syntax 
+		SELECT statement_1
+		UNION ALL
+		SELECT statement_2;
+
+Example
+		SELECT department_id FROM employees
+		UNION ALL
+		SELECT department_id FROM departments;
+-------------------------------------------------------
+SET OPERATORS – INTERSECT
+
+
+Definition:
+
+
+	Returns only those unique rows returned by both queries
+
+Syntax 
+		SELECT statement_1
+		INTERSECT
+		SELECT statement_2;
+
+Example
+		SELECT department_id FROM employees
+		 INTERSECT
+		SELECT department_id FROM departments;
+
+
+---------------------------------------------------------------
+
+
+SET OPERATORS – MINUS
+
+
+Definition:
+
+
+	Returns only those unique rows returned by both queries
+
+Syntax 
+		SELECT statement_1
+		MINUS
+		SELECT statement_2;
+
+Example
+		SELECT department_id FROM employees
+		 MINUS
+		SELECT department_id FROM departments;
+=====================================================================================================================================
+SEQUENCE PDF PPT
+SEQUENCE
+--------
+
+
+Definition:
+
+Sequence is a database object from which multiple users may generate unique integers. You can use sequences to automatically generate primary key values.
+
+Syntax: 		CREATE SEQUENCE [ schema. ] sequence
+   			[ { INCREMENT BY | START WITH } integer  
+   			| { MAXVALUE integer | NOMAXVALUE }
+   			| { MINVALUE integer | NOMINVALUE }
+   			| { CYCLE | NOCYCLE }
+   			| { CACHE integer | NOCACHE }
+   			| { SESSION | GLOBAL }
+   			];
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
