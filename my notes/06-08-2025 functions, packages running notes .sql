@@ -537,6 +537,7 @@ WHERE (job_id, department_id) = (SELECT job_id, department_id
 
 
 
+==============================================================================================
 
 
 
@@ -581,10 +582,98 @@ WHERE (job_id, department_id) = (SELECT job_id, department_id
 
 
 
+any all ppt pdf  any ppt 
+
+CASE STATEMENT
 
 
 
+Definition:
 
+CASE expressions let you use IF ... THEN ... ELSE logic in SQL statements without having to invoke procedures
+
+TYPES: 		
+
+Simple Case
+Search Case
+
+---------------------------
+SIMPLE CASE STATEMENT
+
+
+
+Definition:
+
+In a simple CASE expression, Oracle Database searches for the first WHEN ... THEN pair for which expr is equal to comparison_expr and returns return_expr. If none of the WHEN ... THEN pairs meet this condition, and an ELSE clause exists, then Oracle returns else_expr. Otherwise, Oracle returns null.
+
+SYNTAX: 	
+
+CASE <expr>  WHEN <comparison_expr> THEN  <return_expr> … [ELSE expr]   END
+
+Example:
+
+	SELECT STUDENT_ID, GRADE,
+		CASE GRADE 
+    			WHEN 'A' THEN 'Excellent'
+   			 WHEN 'B' THEN 'Good'
+    			ELSE 'Poor'
+		END As status
+	FROM STUDENT;
+----------------------------------------------------
+
+SEARCH CASE STATEMENT
+
+
+
+Definition:
+
+In a searched CASE expression, Oracle searches from left to right until it finds an 
+    occurrence of condition that is true, and then returns return_expr. If no condition is
+    found to be true, and an ELSE clause exists, then Oracle returns else_expr. Otherwise,
+    Oracle returns null.
+
+
+SYNTAX: 	
+
+	CASE WHEN  <condition> THEN  <return_expr> , … [ELSE expr]  END
+
+------------------------------------------------------------------------
+
+Example:
+
+
+	SELECT student_id, grade,
+		CASE 	WHEN grade = 'A' THEN 'Excellent'
+     			WHEN grade = 'B' THEN 'Good'
+     			ELSE 'Poor'
+		END AS status
+	FROM student;
+---------------------------------------------------------------------------------
+
+
+
+GRANT PPT PDF
+
+
+Use the GRANT statement to grant:
+
+System privileges to users and roles. 
+
+Roles to users, roles, and program units. The granted roles can be either user-defined (local or external) or predefined. 
+
+Object privileges for a particular object to users and roles. 
+
+Syntax For System Privs
+
+		GRANT {system_priv | ALL PRIVILEGES}   TO {user | role | public}
+		WITH ADMIN OPTION
+
+Syntax For Object Privs
+
+		GRANT {object_priv | ALL PRIVILEGES} [ (col_name,…) ] 
+		ON [schema.] object_name
+ 		TO {user | role | public}
+		WITH GRANT OPTION;
 
 
 
