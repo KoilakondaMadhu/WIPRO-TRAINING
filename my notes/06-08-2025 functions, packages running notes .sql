@@ -510,11 +510,28 @@ END pkg_student;
 
 ========================================================================================================
 
+SCALAR SUBQUERY:
+
+SELECT employee_id, first_name, salary
+FROM employees
+WHERE department_id = (SELECT department_id FROM employees WHERE employee_id = 101);
+
+
+MULTI-VALUED SUBQUERY:
+
+SELECT employee_id, first_name, salary
+FROM employees
+WHERE department_id IN (SELECT department_id FROM department WHERE location_id = 1700);
 
 
 
+Multi-column comparison:
 
-
+SELECT employee_id, job_id, department_id
+FROM employees
+WHERE (job_id, department_id) = (SELECT job_id, department_id 
+                                  FROM employees 
+                                  WHERE employee_id = 101);
 
 
 
