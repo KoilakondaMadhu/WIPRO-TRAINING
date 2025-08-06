@@ -676,14 +676,198 @@ Syntax For Object Privs
 		WITH GRANT OPTION;
 
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+is message has been deleted.
+
+Message List
+How do I use the  To_Date function with use... by Devarapu Madhavi
+Devarapu Madhavi
+3:33 PM
+
+
+How do I use the  To_Date function with user input ?
+
+INSERT INTO shipment VALUES (&id, '&sdate',... by Mahendiran
+Mahendiran
+3:39 PM
+
+
+INSERT INTO shipment VALUES (&id, '&sdate',&shipid);
+
+1, dd-mon-rr 20-jan-25 by Mahendiran
+Mahendiran
+3:40 PM
+
+1, dd-mon-rr 20-jan-25
+
+TO_DATE('20th Aug, 2025','DDth Mon, YYYY')  by Mahendiran
+Mahendiran
+3:41 PM
+
+TO_DATE('20th Aug, 2025','DDth Mon, YYYY') 
+
+2- jan - 2002,janiuary 2, 2004, 02-01-2003  by Sri Manikanta Karthik Katta
+Sri Manikanta Karthik Katta
+3:44 PM
+
+
+2- jan - 2002,janiuary 2, 2004, 02-01-2003 
+
+TO_DATE('2-jan - 2002','d-mon - yyyy') by Mahendiran
+Mahendiran
+3:46 PM
+
+
+TO_DATE('2-jan - 2002','d-mon - yyyy')
+
+NY - 02, Jan 2025 - To_date('02, Jan 2025',... by Mahendiran
+Mahendiran
+3:48 PM
+
+NY - 02, Jan 2025 - To_date('02, Jan 2025','dd, Mon 2025');
+
+Japan Jan, 20 2025 - TO_DATE(Jan, 20 2025', by Mahendiran
+Mahendiran
+3:49 PM
+
+Japan Jan, 20 2025 - TO_DATE(Jan, 20 2025',
+
+Japan Jan, 20 2025 - TO_DATE(Jan, 20 2025',... by Mahendiran
+Mahendiran
+3:49 PM
+
+Japan Jan, 20 2025 - TO_DATE(Jan, 20 2025','Mon, dd yyyy');
+
+dd-mon-yyyy by Mahendiran
+Mahendiran
+3:49 PM
+
+dd-mon-yyyy
+
+it's clear sir. Thank you sir by Sri Manikanta Karthik Katta
+Sri Manikanta Karthik Katta
+3:51 PM
+
+
+it's clear sir. Thank you sir
+
+
+😆
+1 Laugh reaction.
+In HR schema there are 4 tables, employees,... by Mahendiran
+Mahendiran
+4:52 PM
+
+
+In HR schema there are 4 tables, employees, departments, locations & countries. 
+
+Write a query to select all employees who a... by Mahendiran
+Mahendiran
+4:53 PM
+
+Write a query to select all employees who are else working in the departments present in COUNTRY_NAME ='United States of America'
+
+try for few mins by Mahendiran
+Mahendiran
+4:53 PM
+
+try for few mins
+
+
+👍
+1 Like reaction.
+
+😆
+1 Laugh reaction.
+desc all tables and see what are the common... by Mahendiran
+Mahendiran
+4:55 PM
+
+desc all tables and see what are the common columns among the tables and how we can join one table to another like
+
+
+👍
+5 Like reactions.
+5
+another question by Mahendiran
+Mahendiran
+4:57 PM
+
+another question
+
+
+👍
+1 Like reaction.
+count the number of employees departments w... by Mahendiran
+Mahendiran
+4:58 PM
+
+count the number of employees departments wise for those departments present in COUNTRY_NAME ='United States of America'
+
+IN NEXT i need those departments which has ... by Mahendiran
+Mahendiran
+5:00 PM
+
+IN NEXT i need those departments which has count of employees => 5
+
+SELECT  employee_id, first_name, job_id, de... by Mahendiran
+Mahendiran
+5:03 PM
+
+SELECT  employee_id, first_name, job_id, department_id FROM EMPLOYEES  WHERE department_id IN 
+( SELECT department_id from departments WHERE location_id IN 
+( SELECT location_id FROM LOCATIONS WHERE COUNTRY_ID IN 
+   (SELECT COUNTRY_ID FROM COUNTRIES WHERE COUNTRY_NAME ='United States of America'
+   )
+  )
+)
+ORDER BY department_id ASC;
+
+SELECT  department_id, COUNT(*) AS TOTAL_EM... by Mahendiran
+Mahendiran
+5:03 PM
+
+SELECT  department_id, COUNT(*) AS TOTAL_EMP FROM EMPLOYEES  WHERE department_id IN 
+( SELECT department_id from departments WHERE location_id IN 
+( SELECT location_id FROM LOCATIONS WHERE COUNTRY_ID IN 
+   (SELECT COUNTRY_ID FROM COUNTRIES WHERE COUNTRY_NAME ='United States of America'
+   )
+  )
+)
+GROUP BY department_id
+ORDER BY TOTAL_EMP DESC;
+
+SELECT  department_id, COUNT(*) AS TOTAL_EM... by Mahendiran
+Mahendiran
+5:03 PM
+
+SELECT  department_id, COUNT(*) AS TOTAL_EMP FROM EMPLOYEES  WHERE department_id IN 
+( SELECT department_id from departments WHERE location_id IN 
+( SELECT location_id FROM LOCATIONS WHERE COUNTRY_ID IN 
+   (SELECT COUNTRY_ID FROM COUNTRIES WHERE COUNTRY_NAME ='United States of America'
+   )
+  )
+)
+GROUP BY department_id
+HAVING COUNT(*) >= 5
 
 
 
+let me know if you have any question from these queries. Just to know how to join multiple tables.
 
 
 
+select all employees whose salary falls between the min and max salary of the job_id = 'AD_ASST'
+ 
+SELECT * FROM employees e WHERE salary 
+BETWEEN (select min_salary from jobs where  job_id ='AD_ASST')
+AND     (select max_salary from jobs where  job_id ='AD_ASST');
+
+In region_name ='Europe' (regions table) which departments are there ? for all those departments calculate the average, max, min and total employee salary department wise.
 
 
+SELECT  department_id, SUM(salary), MIN(salary), Max(salary), AVG(salary) FROM  employees WHERE department_id IN
+( SELECT department_id FROM departments WHERE
 
 
 
