@@ -138,3 +138,149 @@ a) Having
 b) Select
 c) Where
 d) Group by
+
+
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE p5 IS
+
+	i NUMBER;
+
+BEGIN
+
+	SELECT salary INTO i FROM employees WHERE employee_id = 101;
+
+	IF i > 15000 THEN
+
+		RETURN;
+
+	ELSE
+
+		DBMS_OUTPUT.PUT_LINE('Salary is  than 15K');
+
+	END IF;
+
+END;
+
+/
+ 
+sample questions for MCQ
+ 
+2. SELECT salary INTO v_sal FROM EMPLOYEES; This statement raises the exception____________
+
+	a) NO_DATA_FOUND
+
+	b) TOO_MANY_ROWS
+
+	c) VALUE_ERROR
+
+	d) No Exception is raised
+ 
+3. Which of the following is true regarding PL/SQL block
+ 
+	a) Declarative & Executable parts are optional
+
+	b) Executable & Exception parts are optional
+
+	c) Declarative & Exception parts are optional
+
+	d) All are above
+ 
+4. %ROWTYPE is an example of ______________ data type
+ 
+	a) Scalar 
+
+	b) Composite/Record
+
+	c) LOB 
+
+	d) Ref
+ 
+5. PL/SQL does not support ____________ and ___________ statements
+ 
+	a) DDL, DML
+
+	b) DDL, DCL
+
+	c) DML, DCL
+
+	d) None of the above
+ 
+6. 	<<outerblock>>
+
+		DECLARE
+
+			v_sal NUMBER := 100;
+
+		BEGIN
+
+			v_sal := 150;
+<<innerblock>>
+
+					DECLARE
+
+						v_sal NUMBER := 250;
+
+					BEGIN
+
+						outerblock.v_sal := 500;
+
+						v_sal := 500;
+
+						DBMS_OUTPUT.PUT_LINE('The value of v_sal = '||v_sal);
+
+					END innerblock;
+
+			DBMS_OUTPUT.PUT_LINE('The value of v_sal = '||v_sal);
+
+		END outerblock;
+
+	What is the out put of the above code?
+
+		a) 100, 250
+
+		b) 150, 250
+
+		c) 500, 500
+
+		d) 500, 150
+ 
+7.	Which of the followings returns True if the cursor processes the records further?
+
+		a) %ROWCOUNT
+
+		b) %NOTFOUND
+
+		c) %FOUND
+
+		d) %ISOPEN
+ 
+8. 	FOR i IN 5..10 LOOP
+<statements>
+
+	END LOOP;
+
+	In the above code, how many time the statement will be execute?
+
+		a) 1
+
+		b) 6
+
+		c) 10
+
+		d) 15
+ 
+9. 	What is the sequence of steps to use the user defined exception?
+ 
+		a) Raise, Declare, Handle
+
+		b) Declare, Handle, Raise
+
+		c) Declare, Raise, Handle
+
+		d) Handle, Raise, Declare
+ 
+
