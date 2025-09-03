@@ -51,3 +51,92 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
 END;
 /
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------manager ---------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+CREATE OR REPLACE PROCEDURE manger_reportlist_tm
+(
+    p_dir      VARCHAR2,
+    p_filename VARCHAR2
+) IS
+    f_file  UTL_FILE.FILE_TYPE;
+    v_text  VARCHAR2(500);
+    v_lines PLS_INTEGER := 1;
+BEGIN
+    -- Open file for writing
+    f_file := UTL_FILE.FOPEN(p_dir, p_filename, 'W');
+
+    -- Write Header
+    UTL_FILE.PUT_LINE(f_file, 'Employee Details');
+    UTL_FILE.PUT_LINE(f_file,
+                      'Employee Id' || ' | ' ||
+                      'Last Name'   || ' | ' ||
+                      'First Name'  || ' | ' ||
+                      'Phone Number'|| ' | ' ||
+                      'Job Id');
+    UTL_FILE.PUT_LINE(f_file, '---------------------------------------------------');
+
+ -- Outer Loop for Managers
+    FOR c1 IN (
+        SELECT employee_id,
+               last_name,
+               first_name,
+               phone_number,
+               job_id
+        FROM employees
+        WHERE employee_id IN (
+            SELECT DISTINCT manager_id
+            FROM employees
+            WHERE manager_id IS NOT NULL
+        )
+        ORDER BY employee_id
+    ) LOOP
+        -- Write Manager Info
+        UTL_FILE.PUT_LINE(f_file,
+                          c1.employee_id || ' | ' ||
+                          c1.last_name   || ' | ' ||
+                          c1.first_name  || ' | ' ||
+                          c1.phone_number|| ' | ' ||
+                          c1.job_id);
+
+  -- Inner Loop for Employees under each Manager
+        FOR c2 IN (
+            SELECT employee_id,
+                   last_name,
+                   first_name,
+                   phone_number,
+                   job_id,
+                   manager_id
+            FROM employees
+            WHERE manager_id = c1.employee_id
+        ) LOOP
+            UTL_FILE.PUT_LINE(f_file,
+                              '    ' || c2.employee_id || ' | ' ||
+                              c2.last_name   || ' | ' ||
+                              c2.first_name  || ' | ' ||
+                              c2.phone_number|| ' | ' ||
+                              c2.job_id);
+        END LOOP;
+    END LOOP;
+
+    -- Close file
+    UTL_FILE.FCLOSE(f_file);
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE(SQLERRM);
+END;
+/
+
+
+
