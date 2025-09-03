@@ -140,3 +140,118 @@ END;
 
 
 
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+CREATE OR REPLACE PROCEDURE write_filemt (
+    p_errbuf   OUT VARCHAR2,
+    p_retcode  OUT NUMBER,
+    p_dir      IN  VARCHAR2,
+    p_filename IN  VARCHAR2
+) IS
+    f_file  UTL_FILE.FILE_TYPE;
+BEGIN
+    -- Open file for writing
+    f_file := UTL_FILE.FOPEN(p_dir, p_filename, 'W');
+
+    -- Write Header
+    UTL_FILE.PUT_LINE(f_file, 'Employee Details');
+    UTL_FILE.PUT_LINE(f_file,
+                      'Employee Id' || ' | ' ||
+                      'Last Name'   || ' | ' ||
+                      'First Name'  || ' | ' ||
+                      'Phone Number'|| ' | ' ||
+                      'Job Id');
+    UTL_FILE.PUT_LINE(f_file,
+                      '---------------------------------------------------------');
+
+ -- Outer Loop for Managers
+    FOR c1 IN (
+        SELECT employee_id,
+               last_name,
+               first_name,
+               phone_number,
+               job_id
+        FROM employees
+        WHERE employee_id IN (
+            SELECT DISTINCT manager_id
+            FROM employees
+            WHERE manager_id IS NOT NULL
+        )
+        ORDER BY employee_id
+    ) LOOP
+        -- Manager row
+        UTL_FILE.PUT_LINE(f_file,
+                          c1.employee_id || ' | ' ||
+                          c1.last_name   || ' | ' ||
+                          c1.first_name  || ' | ' ||
+                          c1.phone_number|| ' | ' ||
+                          c1.job_id);
+
+
+ -- Inner Loop for Employees reporting to this Manager
+        FOR c2 IN (
+            SELECT employee_id,
+                   last_name,
+                   first_name,
+                   phone_number,
+                   job_id
+            FROM employees
+            WHERE manager_id = c1.employee_id
+        ) LOOP
+            UTL_FILE.PUT_LINE(f_file,
+                              '    ' || c2.employee_id || ' | ' ||
+                              c2.last_name   || ' | ' ||
+                              c2.first_name  || ' | ' ||
+                              c2.phone_number|| ' | ' ||
+                              c2.job_id);
+        END LOOP;
+    END LOOP;
+
+    -- Close file
+    UTL_FILE.FCLOSE(f_file);
+
+
+ -- Success
+    p_retcode := 0;
+    p_errbuf  := NULL;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        -- Failure handling
+        IF UTL_FILE.IS_OPEN(f_file) THEN
+            UTL_FILE.FCLOSE(f_file);
+        END IF;
+        p_retcode := 2;
+        p_errbuf  := SQLERRM;
+END;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
