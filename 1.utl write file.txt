@@ -231,12 +231,28 @@ END;
 
 
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-
-
-
-
+empmadhu.txt-------------------------------------------------------------
+--------------------------------------------------------------------------
+Indent,Job id,job_title,min salary,Max Salary
+J,AD_PRES,President,20080,40000
+J,AD_VP,Administration President,15000,30000
+J,AD_ASST,Administration Assistant,3000,6000
+,FI_MGR,Finance Manager,8200,16000
+,FI_ACCOUNT,Accountant,4200,9000
+J,IT_PROG,IT Programmer,12000,18000
+J,AC_ACCOUNT,Public Accountant,4200,9000
+Indent,emp id,last name,job id,hire date,salary
+E,100,King,AD_PRES,17-Jun-03,24000
+E,101,Kochhar,AD_VP,21-Sep-05,17000
+E,102,De Haan,AD_VP,13-Jan-01,17000
+,103,Hunold,IT_PROG,3-Jan-06,9000
+E,104,Ernst,IT_PROG,21-May-07,6000
+R,105,Austin,IT_PROG,25-Jun-05,4800
+E,106,Pataballa,FI_MGR,5-Feb-06,4800
+,107,Lorentz,IT_PROG,7-Feb-07,4200
+E,108,Greenberg,FI_MGR,17-Aug-02,12008
 
 
 
