@@ -1,0 +1,5 @@
+userid=hr/hr
+control=emp.ctl
+log=emp.log
+errors = 5000
+

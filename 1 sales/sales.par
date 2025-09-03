@@ -1,0 +1,5 @@
+userid=hr/hr
+control=sales.ctl
+log=sales.log
+errors = 5000
+

@@ -1,0 +1,112 @@
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Thu Aug 21 15:23:01 2025
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Control File:   emp.ctl
+Data File:      emp.dat
+  Bad File:     emp.bad
+  Discard File: emp.dsc 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 0
+Errors allowed: 5000
+Bind array:     64 rows, maximum of 256000 bytes
+Continuation:    none specified
+Path used:      Conventional
+
+Table DEPT, loaded when IDEN = 0X44(character 'D')
+Insert option in effect for this table: TRUNCATE
+TRAILING NULLCOLS option in effect
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+IDEN                                    1     *   ,  O(") CHARACTER            
+  (FILLER FIELD)
+DEPARTMENT_ID                        NEXT     *   ,  O(") CHARACTER            
+DEPARTMENT_NAME                      NEXT     *   ,  O(") CHARACTER            
+MANAGER_ID                           NEXT     *   ,  O(") CHARACTER            
+LOCATION_ID                          NEXT     *   ,  O(") CHARACTER            
+
+Table JOB, loaded when IDEN = 0X4a(character 'J')
+Insert option in effect for this table: TRUNCATE
+TRAILING NULLCOLS option in effect
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+IDEN                                    1     *   ,  O(") CHARACTER            
+  (FILLER FIELD)
+JOB_ID                               NEXT     *   ,  O(") CHARACTER            
+JOB_TITLE                            NEXT     *   ,  O(") CHARACTER            
+MIN_SALARY                           NEXT     *   ,  O(") CHARACTER            
+MAX_SALARY                           NEXT     *   ,  O(") CHARACTER            
+
+Table EMP, loaded when IDEN = 0X45(character 'E')
+Insert option in effect for this table: TRUNCATE
+TRAILING NULLCOLS option in effect
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+IDEN                                    1     *   ,  O(") CHARACTER            
+  (FILLER FIELD)
+EMPLOYEE_ID                          NEXT     *   ,  O(") CHARACTER            
+FIRST_NAME                           NEXT     *   ,  O(") CHARACTER            
+LAST_NAME                            NEXT     *   ,  O(") CHARACTER            
+EMAIL                                NEXT     *   ,  O(") CHARACTER            
+PHONE_NUMBER                         NEXT     *   ,  O(") CHARACTER            
+HIRE_DATE                            NEXT     *   ,  O(") CHARACTER            
+JOB_ID                               NEXT     *   ,  O(") CHARACTER            
+SALARY                               NEXT     *   ,  O(") CHARACTER            
+COMMISSION_PCT                       NEXT     *   ,  O(") CHARACTER            
+MANAGER_ID                           NEXT     *   ,  O(") CHARACTER            
+DEPARTMENT_ID                        NEXT     *   ,  O(") CHARACTER            
+
+value used for ROWS parameter changed from 64 to 45
+Record 4: Discarded - failed all WHEN clauses.
+Record 10: Discarded - failed all WHEN clauses.
+Record 3: Rejected - Error on table DEPT, column DEPARTMENT_ID.
+ORA-01438: value larger than specified precision allowed for this column
+
+Record 5: Rejected - Error on table JOB, column JOB_ID.
+ORA-12899: value too large for column "HR"."JOB"."JOB_ID" (actual: 13, maximum: 10)
+
+Record 11: Rejected - Error on table EMP, column EMPLOYEE_ID.
+ORA-01438: value larger than specified precision allowed for this column
+
+Record 22: Discarded - failed all WHEN clauses.
+
+Table DEPT:
+  2 Rows successfully loaded.
+  1 Row not loaded due to data errors.
+  19 Rows not loaded because all WHEN clauses were failed.
+  0 Rows not loaded because all fields were null.
+
+
+Table JOB:
+  4 Rows successfully loaded.
+  1 Row not loaded due to data errors.
+  17 Rows not loaded because all WHEN clauses were failed.
+  0 Rows not loaded because all fields were null.
+
+
+Table EMP:
+  10 Rows successfully loaded.
+  1 Row not loaded due to data errors.
+  11 Rows not loaded because all WHEN clauses were failed.
+  0 Rows not loaded because all fields were null.
+
+
+Space allocated for bind array:                 255420 bytes(45 rows)
+Read   buffer bytes: 1048576
+
+Total logical records skipped:          0
+Total logical records read:            22
+Total logical records rejected:         3
+Total logical records discarded:        3
+
+Run began on Thu Aug 21 15:23:01 2025
+Run ended on Thu Aug 21 15:23:01 2025
+
+Elapsed time was:     00:00:00.74
+CPU time was:         00:00:00.13
